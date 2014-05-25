@@ -1,0 +1,133 @@
+OD(1)                                    User Commands                                   OD(1)
+
+
+
+NAME
+       od - dump files in octal and other formats
+
+SYNOPSIS
+       od [OPTION]... [FILE]...
+       od [-abcdfilosx]... [FILE] [[+]OFFSET[.][b]]
+       od --traditional [OPTION]... [FILE] [[+]OFFSET[.][b] [+][LABEL][.][b]]
+
+DESCRIPTION
+       Write  an  unambiguous representation, octal bytes by default, of FILE to standard out‐
+       put.  With more than one FILE argument, concatenate them in the listed  order  to  form
+       the input.  With no FILE, or when FILE is -, read standard input.
+
+       All arguments to long options are mandatory for short options.
+
+       -A, --address-radix=RADIX
+              decide how file offsets are printed
+
+       -j, --skip-bytes=BYTES
+              skip BYTES input bytes first
+
+       -N, --read-bytes=BYTES
+              limit dump to BYTES input bytes
+
+       -S, --strings[=BYTES]
+              output strings of at least BYTES graphic chars
+
+       -t, --format=TYPE
+              select output format or formats
+
+       -v, --output-duplicates
+              do not use * to mark line suppression
+
+       -w, --width[=BYTES]
+              output BYTES bytes per output line
+
+       --traditional
+              accept arguments in traditional form
+
+       --help display this help and exit
+
+       --version
+              output version information and exit
+
+   Traditional format specifications may be intermixed; they accumulate:
+       -a     same as -t a,  select named characters, ignoring high-order bit
+
+       -b     same as -t o1, select octal bytes
+
+       -c     same as -t c,  select ASCII characters or backslash escapes
+
+       -d     same as -t u2, select unsigned decimal 2-byte units
+
+       -f     same as -t fF, select floats
+
+       -i     same as -t dI, select decimal ints
+
+       -l     same as -t dL, select decimal longs
+
+       -o     same as -t o2, select octal 2-byte units
+
+       -s     same as -t d2, select decimal 2-byte units
+
+       -x     same as -t x2, select hexadecimal 2-byte units
+
+       If  first  and second call formats both apply, the second format is assumed if the last
+       operand begins with + or (if there are 2 operands) a digit.  An OFFSET operand means -j
+       OFFSET.   LABEL  is  the pseudo-address at first byte printed, incremented when dump is
+       progressing.  For OFFSET and LABEL, a 0x or 0X prefix indicates  hexadecimal;  suffixes
+       may be . for octal and b for multiply by 512.
+
+       TYPE is made up of one or more of these specifications:
+
+       a      named character, ignoring high-order bit
+
+       c      ASCII character or backslash escape
+
+       d[SIZE]
+              signed decimal, SIZE bytes per integer
+
+       f[SIZE]
+              floating point, SIZE bytes per integer
+
+       o[SIZE]
+              octal, SIZE bytes per integer
+
+       u[SIZE]
+              unsigned decimal, SIZE bytes per integer
+
+       x[SIZE]
+              hexadecimal, SIZE bytes per integer
+
+       SIZE  is  a  number.   For  TYPE  in  doux,  SIZE may also be C for sizeof(char), S for
+       sizeof(short), I for sizeof(int) or L for sizeof(long).  If TYPE is f, SIZE may also be
+       F for sizeof(float), D for sizeof(double) or L for sizeof(long double).
+
+       RADIX  is  d for decimal, o for octal, x for hexadecimal or n for none.  BYTES is hexa‐
+       decimal with 0x or 0X prefix, and may have a multiplier suffix: b 512, kB 1000, K 1024,
+       MB  1000*1000, M 1024*1024, GB 1000*1000*1000, G 1024*1024*1024, and so on for T, P, E,
+       Z, Y.  Adding a z suffix to any type displays printable characters at the end  of  each
+       output line.  Option --string without a number implies 3; option --width without a num‐
+       ber implies 32.  By default, od uses -A o -t oS -w16.
+
+AUTHOR
+       Written by Jim Meyering.
+
+REPORTING BUGS
+       Report od bugs to bug-coreutils@gnu.org
+       GNU coreutils home page: <http://www.gnu.org/software/coreutils/>
+       General help using GNU software: <http://www.gnu.org/gethelp/>
+       Report od translation bugs to <http://translationproject.org/team/>
+
+COPYRIGHT
+       Copyright © 2011 Free Software Foundation, Inc.  License GPLv3+: GNU GPL version  3  or
+       later <http://gnu.org/licenses/gpl.html>.
+       This  is  free  software: you are free to change and redistribute it.  There is NO WAR‐
+       RANTY, to the extent permitted by law.
+
+SEE ALSO
+       The full documentation for od is maintained as a Texinfo manual.  If the  info  and  od
+       programs are properly installed at your site, the command
+
+              info coreutils 'od invocation'
+
+       should give you access to the complete manual.
+
+
+
+GNU coreutils 8.12.197-032bb            September 2011                                   OD(1)

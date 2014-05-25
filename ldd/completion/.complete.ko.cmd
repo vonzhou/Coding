@@ -1,0 +1,1 @@
+cmd_/home/vonzhou/Coding/ldd/completion/complete.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.8.0-29-generic/scripts/module-common.lds --build-id  -o /home/vonzhou/Coding/ldd/completion/complete.ko /home/vonzhou/Coding/ldd/completion/complete.o /home/vonzhou/Coding/ldd/completion/complete.mod.o

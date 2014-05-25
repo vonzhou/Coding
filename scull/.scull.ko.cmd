@@ -1,0 +1,1 @@
+cmd_/home/vonzhou/Coding/scull/scull.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.8.0-29-generic/scripts/module-common.lds --build-id  -o /home/vonzhou/Coding/scull/scull.ko /home/vonzhou/Coding/scull/scull.o /home/vonzhou/Coding/scull/scull.mod.o

@@ -1,0 +1,1 @@
+cmd_/home/vonzhou/Coding/scull/scull.o := ld -m elf_i386   -r -o /home/vonzhou/Coding/scull/scull.o /home/vonzhou/Coding/scull/main.o /home/vonzhou/Coding/scull/pipe.o /home/vonzhou/Coding/scull/access.o 
