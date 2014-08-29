@@ -1,3 +1,4 @@
+--require "hello"
 
-
-require "hello"
+print(package.path)
+print(package.cpath)
