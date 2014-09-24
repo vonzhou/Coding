@@ -75,17 +75,7 @@ void daemonize(const char *cmd){
 		exit(1);
 	}
 
-	syslog(LOG_INFO, "The daemon is running , haah,,,,");
-}
-
-
-
-
-int main(){
-
-	daemonize("main--");
-	pause();
-	return 0;
+	syslog(LOG_INFO, "===The daemon is running==== ");
 }
 
 

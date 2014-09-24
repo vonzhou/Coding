@@ -1,4 +1,4 @@
-#include "apue.h"
+#include "util.h"
 #include <pthread.h>
 #include <syslog.h>
 
@@ -88,6 +88,10 @@ main(int argc, char *argv[])
 	 * Proceed with the rest of the daemon.
 	 */
 	/* ... */
-	exit(0);
+	syslog(LOG_INFO, "hello vonzhou............");
+	pause();
+	
+
+//	exit(0);
 }
 
