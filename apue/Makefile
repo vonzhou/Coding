@@ -1,6 +1,4 @@
-all: test_siglongjmp suspend1 suspend2 sigsyn exit_status
-test_siglongjmp: error.o  pr_mask.o mask.o
-	gcc -o test_siglongjmp error.o  pr_mask.o mask.o
+all:  suspend1 suspend2 sigsyn exit_status
 suspend1: error.o  pr_mask.o sigsuspend1.o
 	gcc -o suspend1 error.o  pr_mask.o sigsuspend1.o
 suspend2: error.o  pr_mask.o sigsuspend2.o
