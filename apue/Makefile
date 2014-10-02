@@ -1,8 +1,4 @@
-all:  suspend1 suspend2 sigsyn exit_status
-suspend1: error.o  pr_mask.o sigsuspend1.o
-	gcc -o suspend1 error.o  pr_mask.o sigsuspend1.o
-suspend2: error.o  pr_mask.o sigsuspend2.o
-	gcc -o suspend2 error.o  pr_mask.o sigsuspend2.o
+all:   sigsyn exit_status
 sigsyn: error.o  sigsyn.o
 	gcc -o sigsyn error.o  sigsyn.o
 exit_status:error.o exit_status.o
