@@ -32,12 +32,12 @@ foo_alloc(void) /* allocate the object */
 		pthread_mutex_lock(&hashlock);
 		fp->f_next = fh[idx];
 		fh[idx] = fp->f_next;
-																												pthread_mutex_lock(&fp->f_lock);
-																												pthread_mutex_unlock(&hashlock);
-																												/* ... continue initialization ... */
-																												pthread_mutex_unlock(&fp->f_lock);
-																											}
-																											return(fp);
+		pthread_mutex_lock(&fp->f_lock);
+		pthread_mutex_unlock(&hashlock);
+		/* ... continue initialization ... */
+		thread_mutex_unlock(&fp->f_lock);
+		}
+		return(fp);
 }
 
 void
@@ -83,17 +83,17 @@ foo_rele(struct foo *fp) /* release a reference to the object */
 			pthread_mutex_unlock(&fp->f_lock);
 			pthread_mutex_unlock(&hashlock);
 			return;
-																												}
-																												/* remove from list */
-																												idx = HASH(fp);
-																												tfp = fh[idx];
-																												if (tfp == fp) {
+		}
+		/* remove from list */
+		idx = HASH(fp);
+		tfp = fh[idx];
+		if (tfp == fp) {
 			fh[idx] = fp->f_next;
 		} else {
 			while (tfp->f_next != fp)
 			tfp = tfp->f_next;
 			tfp->f_next = fp->f_next;
-																												}
+		}
 		pthread_mutex_unlock(&hashlock);
 		pthread_mutex_unlock(&fp->f_lock);
 		pthread_mutex_destroy(&fp->f_lock);
