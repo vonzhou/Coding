@@ -10,5 +10,5 @@
 7. P87 - string_literal.c  字符串常量存储的位置决定了它不能改变
 8. P93, P107, P97  了解gcc的常见选项的使用
 9. P97 - tomato.c , test.c  创建动态链接库
-10. 
+10.P100 - nm_use.sh   利用nm命令找一个符号的shell脚本   
 
