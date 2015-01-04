@@ -1,0 +1,1 @@
+cmd_/home/vonzhou/GitHub/Coding/kern/nelink/echo/nl_hello.ko := ld -r -m elf_i386 -T /usr/src/linux-headers-3.8.0-29-generic/scripts/module-common.lds --build-id  -o /home/vonzhou/GitHub/Coding/kern/nelink/echo/nl_hello.ko /home/vonzhou/GitHub/Coding/kern/nelink/echo/nl_hello.o /home/vonzhou/GitHub/Coding/kern/nelink/echo/nl_hello.mod.o
