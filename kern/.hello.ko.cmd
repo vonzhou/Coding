@@ -1,1 +1,0 @@
-cmd_/home/vonzhou/bin/hello.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.2.0-23-generic/scripts/module-common.lds --build-id  -o /home/vonzhou/bin/hello.ko /home/vonzhou/bin/hello.o /home/vonzhou/bin/hello.mod.o
