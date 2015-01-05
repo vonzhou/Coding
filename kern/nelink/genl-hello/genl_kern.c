@@ -2,6 +2,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/init.h>
+#include <linux/netlink.h>
 /*netlink attributes 可以通过枚举索引找到对应的类型
 *用户空间应用程序要传递这样的信息*/
 
@@ -12,7 +13,7 @@ __DOC_EXMPL_A_MAX,
 };
 #define DOC_EXMPL_A_MAX (__DOC_EXMPL_A_MAX - 1)
 
-/*atribute policy就是定义各个属性的具体类型，参见net/netlink.h*/
+/*attribute policy就是定义各个属性的具体类型，参见net/netlink.h*/
 static struct nla_policy doc_exmpl_genl_policy[DOC_EXMPL_A_MAX + 1] = {
 	[DOC_EXMPL_A_MSG] = {.type = NLA_NUL_STRING},
 };
@@ -36,15 +37,6 @@ __DOC_EXMPL_C_MAX,
 };
 #define DOC_EXMPL_C_MAX (__DOC_EXMPL_C_MAX - 1)
 
-//将命令command echo和具体的handler对应起来
-static struct genl_ops doc_exmpl_genl_ops_echo = {
-        .cmd = DOC_EXMPL_C_ECHO,
-        .flags = 0,
-        .policy = doc_exmpl_genl_policy,
-        .doit = doc_exmpl_echo,
-        .dumpit = NULL,
-};
-
 //echo command handler,接收一个msg并回复
 int doc_exmpl_echo(struct sk_buff *skb2, struct genl_info *info){
 	struct nlattr *na;
@@ -59,7 +51,7 @@ int doc_exmpl_echo(struct sk_buff *skb2, struct genl_info *info){
 	if(na){
 		data = (char *)nla_data(na);
 		if(!data) printk("Receive data error!\n");
-		else printk("Recv:%s\n",data);
+		else printk(KERN_INFO "Recv:%s\n",data);
 	}else{
 		printk("No info->attrs %d\n",DOC_EXMPL_A_MSG);
 	}
@@ -84,9 +76,9 @@ int doc_exmpl_echo(struct sk_buff *skb2, struct genl_info *info){
 
 	genlmsg_end(skb,msg_hdr);//消息构建完成
 	//单播发送给用户空间的某个进程
-	rc = genlmsg_unicast(genl_info_net(info),skb,info->snd_pid);
+	rc = genlmsg_unicast(genl_info_net(info),skb,info->snd_portid);
 	if(rc != 0){
-		printk("Unicast to process:%d failed!\n",info->snd_pid);
+		printk("Unicast to process:%d failed!\n",info->snd_portid);
 		goto error;
 	}
 	return 0;
@@ -95,6 +87,15 @@ int doc_exmpl_echo(struct sk_buff *skb2, struct genl_info *info){
 	printk("Error occured in doc_echo!\n");
 	return 0;
 }
+
+//将命令command echo和具体的handler对应起来
+static struct genl_ops doc_exmpl_genl_ops_echo = {
+        .cmd = DOC_EXMPL_C_ECHO,
+        .flags = 0,
+        .policy = doc_exmpl_genl_policy,
+        .doit = doc_exmpl_echo,
+        .dumpit = NULL,
+};
 	
 //内核入口，注册generic netlink family/operations
 static int __init genKernel_init(void) {
