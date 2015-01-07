@@ -7,14 +7,17 @@ static int dp_device_event(struct notifier_block *unused, unsigned long event,
 			   void *ptr)
 {
 	struct net_device *dev = ptr;
-	printk(KERN_INFO "%d\n", dev==NULL);
-	printk(KERN_INFO "net device ifindex : %d\n", dev->ifindex);
- 
+	//printk(KERN_INFO "%d\n", dev==NULL);
+	printk(KERN_INFO "net device ifindex : %d, name:%s\n", dev->ifindex, dev->name);
+	printk(KERN_INFO "net device event : %ld\n", event);
+    
 	switch (event) {
 	case NETDEV_UNREGISTER:
-		break;
+	    printk(KERN_INFO "unregister\n");
+        break;
 
-	case NETDEV_CHANGENAME:
+    case NETDEV_CHANGENAME:
+        printk(KERN_INFO "change name\n");
 		break;
 	}
 	return NOTIFY_DONE;
