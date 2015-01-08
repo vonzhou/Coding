@@ -6,7 +6,7 @@
 4. netdev-test - 网络设备API实践
 5. page - 页分配管理
 6. slab - slab分配器的使用及缓存管理    TODO
-7. process - 进程调度及管理
+7. process - 获得当前进程，打印进程树结构
 8. percpu - 使用每CPU变量,以及关于CPU的操作 
 
  
