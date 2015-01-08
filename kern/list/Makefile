@@ -9,5 +9,5 @@ else
 all:
 	$(MAKE) -C $(KDIR) M=$(PWD)
 clean:
-	rm -rf *.o *.mod.c *.ko *.mod.o *.symvers *.order *-
+	rm -rf *.o *.mod.c *.ko *.mod.o *.symvers *.order .*.cmd .tmp*
 endif
