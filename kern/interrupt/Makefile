@@ -1,6 +1,6 @@
 ifneq ($(KERNELRELEASE),)
-mymodule-objs:=interceptor.c
-obj-m += interceptor.o
+mymodule-objs:=kbd.c
+obj-m += kbd.o
 else
 	PWD := $(shell pwd)
 	KVER := $(shell uname -r)

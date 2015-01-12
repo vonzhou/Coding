@@ -9,4 +9,4 @@
 7. process - 获得当前进程，打印进程树结构
 8. percpu - 使用每CPU变量,以及关于CPU的操作 
 9. jiffies - 定时器
- 
+10. syscall - 查看系统调用表的信息，以及拦截 
