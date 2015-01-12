@@ -10,3 +10,7 @@
 8. percpu - 使用每CPU变量,以及关于CPU的操作 
 9. jiffies - 定时器
 10. syscall - 查看系统调用表的信息，以及拦截 
+11. irq-request 设置键盘中断处理程序
+12. irq-tasklet 使用tasklet
+13. memory-area 打印当前进程的所有内存区域(各个段)
+
