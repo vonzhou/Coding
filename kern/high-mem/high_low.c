@@ -6,12 +6,13 @@
 #include <linux/mm_types.h>
 #include <asm/io.h>
 #include <linux/types.h>
-
+#include <asm/cache.h>   // 
 
 static int hello_init(void) {
 		// 内核中分配内存的常见情况
 		struct page *mypage = alloc_page(GFP_USER);
 		struct page *highmem_page;
+		pr_info("L1 cache size %d\n", L1_CACHE_BYTES);
 		if (!mypage) printk(KERN_ERR "Couldn't allocate normal page\n" );
 		else {
 
@@ -24,8 +25,6 @@ static int hello_init(void) {
 				printk(KERN_ERR "Physical Address is %lx \n", phy_addr);
 		}
 
-		//kunmap(highmem_page);
-		__free_page( mypage);
 
 		// 分配高端内存 然后映射到内核空间
 		highmem_page = alloc_page(GFP_HIGHUSER);
@@ -46,6 +45,7 @@ static int hello_init(void) {
 
 		kunmap(highmem_page);
 		__free_page( highmem_page);
+		__free_page(mypage);
 
 		return 0;
 }
