@@ -6,13 +6,18 @@
 #include <linux/mm_types.h>
 #include <asm/io.h>
 #include <linux/types.h>
-#include <asm/cache.h>   // 
+#include <asm/cache.h>   //  L1_CACHE_BYTES
+#include <asm/page_types.h>  //  PAGE_OFFSET
+#include <linux/mm.h>    //varibale high_memory
 
 static int hello_init(void) {
 		// 内核中分配内存的常见情况
 		struct page *mypage = alloc_page(GFP_USER);
 		struct page *highmem_page;
 		pr_info("L1 cache size %d\n", L1_CACHE_BYTES);
+		pr_info("page_offset : %lx\n", PAGE_OFFSET);
+		pr_info("high memory begining : %lx\n", (unsigned long)high_memory);
+		
 		if (!mypage) printk(KERN_ERR "Couldn't allocate normal page\n" );
 		else {
 
