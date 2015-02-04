@@ -6,4 +6,6 @@ ptrace2 - 获得系统调用的参数 和 返回值 PTRACE_SYSCALL 设置的是�
 ptrace3 - 利用PTRACE_GETREGS获得系统调用时寄存器值
 ptrace4 - 改变tracee中的内存单元内容 每次读取的是一个word
 ptrace5 - 在系统调用之后单步执行，获得正在执行的指令
-
+attach.c dummy2.c - 探测非孩子进程 用PTRACE_ATTACH
+breakpoint.c - 插入断点INT3
+breakpoint2.c - 向另一个进程空间中插入代码片段
