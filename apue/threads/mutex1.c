@@ -53,9 +53,9 @@ void *thr_fn1(void *pp){
 }
 void *thr_fn2(void *pp){
 	struct foo *p=(struct foo *)pp;
-        printf("thread 2.......\n");
-        foo_hold(p);
-        pthread_exit((void*)2);
+    printf("thread 2.......\n");
+    foo_hold(p);
+    pthread_exit((void*)2);
 }
 int 
 main(){

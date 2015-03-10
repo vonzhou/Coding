@@ -1,11 +1,10 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include "util.h"
+
 #include<stdarg.h>		/* ANSI C header file */
 #include<syslog.h>		/* for syslog() */
-#include <sys/errno.h>
 
-int		daemon_proc;		/* set nonzero by daemon_init() */
-#define MAXLINE 80
+int	daemon_proc;		/* set nonzero by daemon_init() */
+
 static void	err_doit(int, int, const char *, va_list);
 
 /* Nonfatal error related to system call
