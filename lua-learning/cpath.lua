@@ -1,4 +1,0 @@
-
-
-
-print(LUA_CPATH)
