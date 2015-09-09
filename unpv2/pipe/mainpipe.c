@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 void	client(int, int), server(int, int);
 
@@ -11,14 +11,15 @@ main(int argc, char **argv)
 	Pipe(pipe1);	/* create two pipes */
 	Pipe(pipe2);
 
-	if ( (childpid = Fork()) == 0) {		/* child */
+	if ( (childpid = Fork()) == 0) {		
+		/* child: write pipe2, read pipe1 */
 		Close(pipe1[1]);
 		Close(pipe2[0]);
 
 		server(pipe1[0], pipe2[1]);
 		exit(0);
 	}
-		/* 4parent */
+	/* parent , read pipe2 , write pipe1*/
 	Close(pipe1[0]);
 	Close(pipe2[1]);
 
