@@ -16,6 +16,22 @@
 
 ![](svshm-op.png)
 
+### System V IPC存在诸多限制 ？
+
+我试图运行[limits.c](limits.c)来探测，发现在打开数为4091的时候出现内存不足（受限于内存大小）
+
+Fuck得到了4091个共享区，如何删除，只能指定shmid，（**问题**：如何删除shmid大于某个值的shm ？）
+
+![](svshm-limit.png)
+
+**Linux下面的限制：**
+
+![](svshm-linux-limit1.png)
+
+限制的含义：
+
+![](svshm-linux-limit2.png)
+
 
 附，上面的4个程序为：
 

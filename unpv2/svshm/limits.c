@@ -1,10 +1,9 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	MAX_NIDS	4096
 
 int
 main(int argc, char **argv)
-/* $$.bp$$ */
 {
 	int		i, j, shmid[MAX_NIDS];
 	void	*addr[MAX_NIDS];
