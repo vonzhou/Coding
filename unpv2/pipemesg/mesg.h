@@ -1,11 +1,11 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 /* Our own "messages" to use with pipes, FIFOs, and message queues. */
 
-	/* 4want sizeof(struct mymesg) <= PIPE_BUF */
+/* want sizeof(struct mymesg) <= PIPE_BUF, control the data length  */
 #define	MAXMESGDATA	(PIPE_BUF - 2*sizeof(long))
 
-	/* 4length of mesg_len and mesg_type */
+/* length of mesg_len and mesg_type */
 #define	MESGHDRSIZE	(sizeof(struct mymesg) - MAXMESGDATA)
 
 struct mymesg {

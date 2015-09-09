@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #include	<stdarg.h>		/* ANSI C header file */
 #include	<syslog.h>		/* for syslog() */
@@ -113,3 +113,4 @@ err_doit(int errnoflag, int level, const char *fmt, va_list ap)
 	}
 	return;
 }
+

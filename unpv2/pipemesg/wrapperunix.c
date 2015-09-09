@@ -103,35 +103,6 @@ Fork(void)
 	return(pid);
 }
 
-long
-Pathconf(const char *pathname, int name)
-{
-	long	val;
-
-	errno = 0;		/* in case pathconf() does not change this */
-	if ( (val = pathconf(pathname, name)) == -1) {
-		if (errno != 0)
-			err_sys("pathconf error");
-		else
-			err_sys("pathconf: %d not defined", name);
-	}
-	return(val);
-}
-
-long
-Sysconf(int name)
-{
-	long	val;
-
-	errno = 0;		/* in case sysconf() does not change this */
-	if ( (val = sysconf(name)) == -1) {
-		if (errno != 0)
-			err_sys("sysconf error");
-		else
-			err_sys("sysconf: %d not defined", name);
-	}
-	return(val);
-}
 
 
 void *

@@ -47,7 +47,6 @@ readline(int fd, void *vptr, size_t maxlen)
 	*ptr = 0;	/* null terminate like fgets() */
 	return(n);
 }
-/* end readline */
 
 ssize_t
 Readline(int fd, void *ptr, size_t maxlen)

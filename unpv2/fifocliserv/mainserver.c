@@ -10,11 +10,11 @@ main(int argc, char **argv)
 	pid_t	pid;
 	ssize_t	n;
 
-		/* 4create server's well-known FIFO; OK if already exists */
+	/* create server's well-known FIFO; OK if already exists */
 	if ((mkfifo(SERV_FIFO, FILE_MODE) < 0) && (errno != EEXIST))
 		err_sys("can't create %s", SERV_FIFO);
 
-		/* 4open server's well-known FIFO for reading and writing */
+	/* open server's well-known FIFO for reading and writing */
 	readfifo = Open(SERV_FIFO, O_RDONLY, 0);
 	dummyfd = Open(SERV_FIFO, O_WRONLY, 0);		/* never used */
 
@@ -37,7 +37,7 @@ main(int argc, char **argv)
 		}
 
 		if ( (fd = open(ptr, O_RDONLY)) < 0) {
-				/* 4error: must tell client */
+			/* error: must tell client */
 			snprintf(buff + n, sizeof(buff) - n, ": can't open, %s\n",
 					 strerror(errno));
 			n = strlen(ptr);
@@ -45,7 +45,7 @@ main(int argc, char **argv)
 			Close(writefifo);
 	
 		} else {
-				/* 4open succeeded: copy file to FIFO */
+			/* open succeeded: copy file to FIFO */
 			while ( (n = Read(fd, buff, MAXLINE)) > 0)
 				Write(writefifo, buff, n);
 			Close(fd);

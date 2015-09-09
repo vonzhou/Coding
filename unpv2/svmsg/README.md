@@ -1,4 +1,4 @@
-# system v msg queue 
+# System V 消息队列
 
 ---
 
@@ -16,7 +16,7 @@
 
 ![](svmsg-compile.png)
 
-## 示例-利用上述程序
+### 示例-利用上述程序
 
 使用不存在的路径创建消息队列会报错。
 
@@ -25,3 +25,6 @@
 ![](svmsg-example1.png)
 
 ![](svmsg-example2.png)
+
+
+### 使用两个消息队列实现前面的[客户-服务端程序]()

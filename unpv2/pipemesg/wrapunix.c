@@ -1,5 +1,4 @@
-/*
- * Socket wrapper functions.
+/* socket wrapper functions.
  * These could all go into separate files, so only the ones needed cause
  * the corresponding function to be added to the executable.  If sockets
  * are a library (SVR4) this might make a difference (?), but if sockets
@@ -327,7 +326,7 @@ Open(const char *pathname, int oflag, ...)
 
 	if (oflag & O_CREAT) {
 		va_start(ap, oflag);		/* init ap to final named argument */
-		mode = va_arg(ap, mode_t);
+		mode = va_arg(ap, va_mode_t);
 		if ( (fd = open(pathname, oflag, mode)) == -1)
 			err_sys("open error for %s", pathname);
 		va_end(ap);
@@ -745,3 +744,4 @@ Write(int fd, void *ptr, size_t nbytes)
 	if (write(fd, ptr, nbytes) != nbytes)
 		err_sys("write error");
 }
+

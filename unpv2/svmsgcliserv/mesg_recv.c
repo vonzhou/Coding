@@ -1,4 +1,3 @@
-/* include mesg_recv */
 #include	"mesg.h"
 
 ssize_t
@@ -11,7 +10,6 @@ mesg_recv(int id, struct mymesg *mptr)
 
 	return(n);				/* -1 on error, 0 at EOF, else >0 */
 }
-/* end mesg_recv */
 
 ssize_t
 Mesg_recv(int id, struct mymesg *mptr)

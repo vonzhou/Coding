@@ -33,9 +33,13 @@
 ![](client-server-main.png)
 
 
-### 单个服务器多个客户 使用FIFO通信  -- fifocliserv ;
+## [使用FIFO的单服务器，多客户端程序](../fifocliserv/)
 
-### 给管道增加消息头结构    -- pipemesg ;
+### ## [为发送的消息增加消息头结构，而不是直接使用字节流](../pipemesg/)
+
+### pipe和FIFO在Linux下的限制
+
+![](pipe-limit.png)
 
 
 ###  sibling communicate by pipe, 2015-8-22 

@@ -337,20 +337,7 @@ Open(const char *pathname, int oflag, ...)
 	return(fd);
 }
 
-long
-Pathconf(const char *pathname, int name)
-{
-	long	val;
 
-	errno = 0;		/* in case pathconf() does not change this */
-	if ( (val = pathconf(pathname, name)) == -1) {
-		if (errno != 0)
-			err_sys("pathconf error");
-		else
-			err_sys("pathconf: %d not defined", name);
-	}
-	return(val);
-}
 
 void
 Pipe(int *fds)
