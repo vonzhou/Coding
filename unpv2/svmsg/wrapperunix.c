@@ -1,7 +1,110 @@
 
 #include "../unpipc.h"
 
-// ---------------- basic --------------------
+// ---------------- fd and file read/write --------------------
+int
+Open(const char *pathname, int oflag, ...)
+{
+	int		fd;
+	va_list	ap;
+	mode_t	mode;
+
+	if (oflag & O_CREAT) {
+		va_start(ap, oflag);		/* init ap to final named argument */
+		mode = va_arg(ap, va_mode_t);
+		if ( (fd = open(pathname, oflag, mode)) == -1)
+			err_sys("open error for %s", pathname);
+		va_end(ap);
+	} else {
+		if ( (fd = open(pathname, oflag)) == -1)
+			err_sys("open error for %s", pathname);
+	}
+	return(fd);
+}
+
+
+void
+Close(int fd)
+{
+	if (close(fd) == -1)
+		err_sys("close error");
+}
+
+void
+Dup2(int fd1, int fd2)
+{
+	if (dup2(fd1, fd2) == -1)
+		err_sys("dup2 error");
+}
+
+int
+Fcntl(int fd, int cmd, void *arg)
+{
+	int	n;
+
+	if ( (n = fcntl(fd, cmd, arg)) == -1)
+		err_sys("fcntl error");
+	return(n);
+}
+
+ssize_t
+Read(int fd, void *ptr, size_t nbytes)
+{
+	ssize_t		n;
+
+	if ( (n = read(fd, ptr, nbytes)) == -1)
+		err_sys("read error");
+	return(n);
+}
+
+
+void
+Write(int fd, void *ptr, size_t nbytes)
+{
+	if (write(fd, ptr, nbytes) != nbytes)
+		err_sys("write error");
+}
+
+void
+Unlink(const char *pathname)
+{
+	if (unlink(pathname) == -1)
+		err_sys("unlink error for %s", pathname);
+}
+// ------------------- process and thread control ----------------
+
+pid_t
+Wait(int *iptr)
+{
+	pid_t	pid;
+
+	if ( (pid = wait(iptr)) == -1)
+		err_sys("wait error");
+	return(pid);
+}
+
+pid_t
+Waitpid(pid_t pid, int *iptr, int options)
+{
+	pid_t	retpid;
+
+	if ( (retpid = waitpid(pid, iptr, options)) == -1)
+		err_sys("waitpid error");
+	return(retpid);
+}
+
+pid_t
+Fork(void)
+{
+	pid_t	pid;
+
+	if ( (pid = fork()) == -1)
+		err_sys("fork error");
+	return(pid);
+}
+
+
+
 void *
 Malloc(size_t size)
 {
@@ -31,6 +134,23 @@ Getopt(int argc, char *const *argv, const char *str)
 		exit(1);		/* getopt() has already written to stderr */
 	return(opt);
 }
+
+// -------------- pipe and fifo --------------
+
+void
+Pipe(int *fds)
+{
+	if (pipe(fds) < 0)
+		err_sys("pipe error");
+}
+
+void
+Mkfifo(const char *pathname, mode_t mode)
+{
+	if (mkfifo(pathname, mode) == -1)
+		err_sys("mkfifo error for %s", pathname);
+}
+
 
 // ---------------- system v msg queue ------------
 int

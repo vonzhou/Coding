@@ -17,7 +17,7 @@
 #include	<sys/stat.h>	/* for S_xxx file mode constants */
 #include	<unistd.h>
 #include	<sys/wait.h>
-
+#include	<stdarg.h>		/* for variable arg lists */
 
 
 
@@ -143,12 +143,11 @@ union semun {				/* define union for semctl() */
 /* $$.ix [BUFFSIZE]~constant,~definition~of$$ */
 #define	BUFFSIZE	8192	/* buffer size for reads and writes */
 
+/* default permissions for new files */
 #define	FILE_MODE	(S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
-					/* default permissions for new files */
-/* $$.ix [FILE_MODE]~constant,~definition~of$$ */
+					
 #define	DIR_MODE	(FILE_MODE | S_IXUSR | S_IXGRP | S_IXOTH)
 					/* default permissions for new directories */
-/* $$.ix [DIR_MODE]~constant,~definition~of$$ */
 
 
 // vonzhou :  error: ‘MSG_R’ undeclared (first use in this function)
