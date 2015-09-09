@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -11,7 +11,7 @@ main(int argc, char **argv)
 
 	buf.mtype = 1;
 	buf.mtext[0] = 1;
-	Msgsnd(msqid, &buf, 1, 0);
+	Msgsnd(msqid, &buf, 1, 0); // send one byte 
 
 	Msgctl(msqid, IPC_STAT, &info);
 	printf("read-write: %03o, cbytes = %lu, qnum = %lu, qbytes = %lu\n",
@@ -21,5 +21,6 @@ main(int argc, char **argv)
 	system("ipcs -q");
 
 	Msgctl(msqid, IPC_RMID, NULL);
+	
 	exit(0);
 }

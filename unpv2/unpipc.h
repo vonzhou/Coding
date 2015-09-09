@@ -1,13 +1,8 @@
-/* include unpipch */
-/* Our own header.  Tabs are set for 4 spaces, not 8 */
+
+/* headers on Linux for unpv2 , vonzhou*/
 
 #ifndef	__unpipc_h
 #define	__unpipc_h
-
-
-
-/* If anything changes in the following list of #includes, must change
-   ../aclocal.m4 and ../configure.in also, for configure's tests. */
 
 #include	<sys/types.h>	/* basic system data types */
 #include	<sys/time.h>	/* timeval{} for select() */
@@ -24,20 +19,34 @@
 #include	<sys/wait.h>
 
 
-// ftok()
-# include	<sys/ipc.h>		/* System V IPC */
 
-# include	<sys/shm.h>		/* System V shared memory */
+
+// ftok()
+#include	<sys/ipc.h>		/* System V IPC */
+
+#include	<sys/shm.h>		/* System V shared memory */
+
+#include 	<sys/msg.h> /* System V message queues */
 
 # include	<mqueue.h>		/* Posix message queues */
 
-# include	<semaphore.h>	/* Posix semaphores */
+#include	<semaphore.h>	/* Posix semaphores */
+
+# include	<sys/mman.h>	/* Posix shared memory */
+
+
+//vonzhou: error: storage size of ‘buf’ isn’t known (struct msgbuf )
+struct msgbuf{
+	long mtype;
+	char mtext[1];
+};
+
 
 #ifndef	SEM_FAILED
 #define	SEM_FAILED	((sem_t *)(-1))
 #endif
 
-# include	<sys/mman.h>	/* Posix shared memory */
+
 
 #ifndef	MAP_FAILED
 #define	MAP_FAILED	((void *)(-1))
@@ -45,9 +54,6 @@
 
 
 
-#ifdef	HAVE_SYS_MSG_H
-# include	<sys/msg.h>		/* System V message queues */
-#endif
 
 #ifdef	HAVE_SYS_SEM_H
 #ifdef	__bsdi__
@@ -144,17 +150,26 @@ union semun {				/* define union for semctl() */
 					/* default permissions for new directories */
 /* $$.ix [DIR_MODE]~constant,~definition~of$$ */
 
+
+// vonzhou :  error: ‘MSG_R’ undeclared (first use in this function)
+#define MSG_R 0400
+#define MSG_W 0200 
+/* default permissions for new SV message queues */
 #define	SVMSG_MODE	(MSG_R | MSG_W | MSG_R>>3 | MSG_R>>6)
-					/* default permissions for new SV message queues */
+					
 /* $$.ix [SVMSG_MODE]~constant,~definition~of$$ */
 #define	SVSEM_MODE	(SEM_R | SEM_A | SEM_R>>3 | SEM_R>>6)
 					/* default permissions for new SV semaphores */
-/* $$.ix [SVSEM_MODE]~constant,~definition~of$$ */
+
+/* default permissions for new SV shared memory */
 #define	SVSHM_MODE	(SHM_R | SHM_W | SHM_R>>3 | SHM_R>>6)
 					/* default permissions for new SV shared memory */
-/* $$.ix [SVSHM_MODE]~constant,~definition~of$$ */
 
-typedef	void	Sigfunc(int);	/* for signal handlers */
+/* for signal handlers */
+typedef	void	Sigfunc(int);
+
+/* vonzhou , error: ‘ulong_t’ undeclared (first use in this function)*/
+typedef unsigned long ulong_t;
 
 #ifdef	HAVE_SIGINFO_T_STRUCT
 typedef	void	Sigfunc_rt(int, siginfo_t *, void *);
@@ -362,13 +377,11 @@ int		 Shm_open(const char *, int, mode_t);
 void	 Shm_unlink(const char *);
 #endif
 
-#ifdef	HAVE_SYS_MSG_H
-			/* 4System V message queues */
+/* System V message queues API*/
 int		 Msgget(key_t key, int flag);
 void	 Msgctl(int, int, struct msqid_ds *);
 void	 Msgsnd(int, const void *, size_t, int);
 ssize_t	 Msgrcv(int, void *, size_t, int, int);
-#endif	/* HAVE_SYS_MSG_H */
 
 #ifdef	HAVE_SYS_SEM_H
 			/* 4System V semaphores */
@@ -377,13 +390,13 @@ int		 Semctl(int, int, int, ...);
 void	 Semop(int, struct sembuf *, size_t);
 #endif	/* HAVE_SYS_SEM_H */
 
-			/* 4System V shared memory */
+/* System V shared memory */
 int		 Shmget(key_t, size_t, int);
 void	*Shmat(int, const void *, int);
 void	 Shmdt(const void *);
 void	 Shmctl(int, int, struct shmid_ds *);
 
-			/* prototypes for our stdio wrapper functions */
+/* prototypes for our stdio wrapper functions */
 void	 Fclose(FILE *);
 FILE	*Fdopen(int, const char *);
 char	*Fgets(char *, int, FILE *);

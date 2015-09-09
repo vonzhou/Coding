@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -17,5 +17,6 @@ main(int argc, char **argv)
 		err_quit("usage: msgcreate [ -e ] <pathname>");
 
 	mqid = Msgget(Ftok(argv[optind], 0), oflag);
+	
 	exit(0);
 }

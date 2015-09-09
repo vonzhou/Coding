@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	MAXMSG	(8192 + sizeof(long))
 
