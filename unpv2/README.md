@@ -1,7 +1,7 @@
 # Unix Network Programming Volume 2
 ---
 
-
+**目的：** 在Linux下跑通书中所有程序！
 
 
 
