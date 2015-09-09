@@ -97,7 +97,6 @@ Fstat(int fd, struct stat *ptr)
 		err_sys("fstat error");
 }
 
-#ifdef	HAVE_SYS_IPC_H
 key_t
 Ftok(const char *pathname, int id)
 {
@@ -107,7 +106,6 @@ Ftok(const char *pathname, int id)
 		err_sys("ftok error for pathname \"%s\" and id %d", pathname, id);
 	return(key);
 }
-#endif	/* HAVE_SYS_IPC_H */
 
 void
 Ftruncate(int fd, off_t length)
@@ -389,8 +387,6 @@ again:
 }
 /* end Select */
 
-#ifdef	HAVE_SEMAPHORE_H
-
 sem_t *
 Sem_open(const char *pathname, int oflag, ...)
 {
@@ -474,9 +470,7 @@ Sem_getvalue(sem_t *sem, int *valp)
 		err_sys("sem_getvalue error");
 }
 
-#endif	/* HAVE_SEMAPHORE_H */
 
-#ifdef	HAVE_SYS_SEM_H
 int
 Semget(key_t key, int nsems, int flag)
 {
@@ -515,9 +509,7 @@ Semctl(int id, int semnum, int cmd, ...)
 	return(rc);
 }
 
-#endif	/* HAVE_SYS_SEM_H */
 
-#ifdef	HAVE_SHM_OPEN_PROTO
 
 int
 Shm_open(const char *pathname, int oflag, mode_t mode)
@@ -537,9 +529,6 @@ Shm_unlink(const char *pathname)
 		err_sys("shm_unlink error");
 }
 
-#endif	/* HAVE_SHM_OPEN_PROTO */
-
-#ifdef	HAVE_SYS_SHM_H
 
 int
 Shmget(key_t key, size_t size, int flags)
@@ -575,7 +564,6 @@ Shmctl(int id, int cmd, struct shmid_ds *buff)
 		err_sys("shmctl error");
 }
 
-#endif	/* HAVE_SYS_SHM_H */
 
 void
 Sigaddset(sigset_t *set, int signo)

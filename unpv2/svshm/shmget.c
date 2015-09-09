@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../lib/unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -21,6 +21,8 @@ main(int argc, char **argv)
 
 	id = Shmget(Ftok(argv[optind], 0), length, oflag);
 	ptr = Shmat(id, NULL, 0);
+
+	printf("shm addr : %p\n", ptr);
 
 	exit(0);
 }

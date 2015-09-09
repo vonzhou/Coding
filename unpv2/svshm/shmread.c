@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../lib/unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -16,7 +16,7 @@ main(int argc, char **argv)
 
 		/* 4check that ptr[0] = 0, ptr[1] = 1, etc. */
 	for (i = 0; i < buff.shm_segsz; i++)
-		if ( (c = *ptr++) != (i % 256))
+		if ( (c = *ptr++) != (i % 256)) //vonzhou: check the content pattern 
 			err_ret("ptr[%d] = %d", i, c);
 
 	exit(0);

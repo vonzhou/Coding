@@ -8,6 +8,10 @@ R:APUE14.3
 7. 给管道增加消息头结构    -- pipemesg ;
 
 
+### sibling communicate by pipe, 2015-8-22 
+利用pipe实现兄弟进程之间的通信 sibling-pipe.c
+
+###
 
 
 

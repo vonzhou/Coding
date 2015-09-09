@@ -278,7 +278,7 @@ void execute_cgi(int client, const char *path,
    sprintf(length_env, "CONTENT_LENGTH=%d", content_length);
    putenv(length_env);
   }
-  execl(path, path, NULL);
+  execl(path, path, NULL);  // XXX
   exit(0);
  } else {    /* parent */
   close(cgi_output[1]);

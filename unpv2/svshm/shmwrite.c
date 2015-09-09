@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../lib/unpipc.h"
 
 int
 main(int argc, char **argv)
