@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	MAX_DATA	64*1024
 #define	MAX_NMESG	4096
@@ -15,7 +15,7 @@ main(int argc, char **argv)
 {
 	int		i, j, msqid, qid[MAX_NIDS];
 
-		/* 4first try and determine maximum amount of data we can send */
+	/* first try and determine maximum amount of data we can send */
 	msqid = Msgget(IPC_PRIVATE, SVMSG_MODE | IPC_CREAT);
 	mesg.type = 1;
 	for (i = MAX_DATA; i > 0; i -= 128) {
@@ -31,7 +31,7 @@ main(int argc, char **argv)
 		err_quit("i == 0");
 	Msgctl(msqid, IPC_RMID, NULL);
 
-		/* 4see how many messages of varying size can be put onto a queue */
+	/* see how many messages of varying size can be put onto a queue */
 	mesg.type = 1;
 	for (i = 8; i <= max_mesg; i *= 2) {
 		msqid = Msgget(IPC_PRIVATE, SVMSG_MODE | IPC_CREAT);
@@ -48,7 +48,7 @@ main(int argc, char **argv)
 		Msgctl(msqid, IPC_RMID, NULL);
 	}
 
-		/* 4see how many identifiers we can "open" */
+	/* see how many identifiers we can "open" */
 	mesg.type = 1;
 	for (i = 0; i <= MAX_NIDS; i++) {
 		if ( (qid[i] = msgget(IPC_PRIVATE, SVMSG_MODE | IPC_CREAT)) == -1) {

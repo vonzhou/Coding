@@ -28,3 +28,16 @@
 
 
 ### 使用两个消息队列实现前面的[客户-服务端程序](../svmsgcliserv/)，[回头看看](../pipemesg/)
+
+### [整个应用一个队列](../svmsgmpx1q/)
+
+### [每个客户一个队列](../svmsgmpxnq)
+
+### System V 消息队列在Linux上的限制
+
+![](svmsg-limits.png)
+
+可以看到通过[limits.c](limits.c)程序，和对系统参数的查看是一致的。
+
+
+
