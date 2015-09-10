@@ -53,24 +53,15 @@ struct msgbuf{
 #endif
 
 
-
-
-#ifdef	HAVE_SYS_SEM_H
-#ifdef	__bsdi__
-#undef	HAVE_SYS_SEM_H		/* hack: BSDI's semctl() prototype is wrong */
-#else
 # include	<sys/sem.h>		/* System V semaphores */
-#endif
-
-#ifndef	HAVE_SEMUN_UNION
-/* $$.It semun$$ */
+// Yes in Linux #ifndef	HAVE_SEMUN_UNION
 union semun {				/* define union for semctl() */
   int              val;
   struct semid_ds *buf;
   unsigned short  *array;
 };
-#endif
-#endif	/* HAVE_SYS_SEM_H */
+/* hack: BSDI's semctl() prototype is wrong */
+
 
 
 
@@ -350,8 +341,7 @@ void	 Mq_getattr(mqd_t, struct mq_attr *);
 void	 Mq_setattr(mqd_t, const struct mq_attr *, struct mq_attr *);
 #endif	/* HAVE_MQUEUE_H */
 
-#ifdef	HAVE_SEMAPHORE_H
-			/* 4Posix semaphores */
+/* Posix semaphores */
 sem_t	*Sem_open(const char *, int, ...);
 void	 Sem_close(sem_t *);
 void	 Sem_unlink(const char *);
@@ -361,7 +351,6 @@ void	 Sem_wait(sem_t *);
 int		 Sem_trywait(sem_t *);
 void	 Sem_post(sem_t *);
 void	 Sem_getvalue(sem_t *, int *);
-#endif	/* HAVE_SEMAPHORE_H */
 
 /* Note that <sys/mman.h> is defined on some systems that do not support
  * Posix shared memory (e.g., 4.4BSD), because this header predates Posix
