@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 
 void
 str_cli(FILE *fp, int sockfd)
@@ -14,7 +14,7 @@ str_cli(FILE *fp, int sockfd)
 		exit(0);
 	}
 
-		/* parent: stdin -> server */
+	/* parent: stdin -> server */
 	while (Fgets(sendline, MAXLINE, fp) != NULL)
 		Writen(sockfd, sendline, strlen(sendline));
 

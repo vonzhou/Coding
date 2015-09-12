@@ -1,5 +1,5 @@
 /* Test shutdown(fd,SHUT_RD) and see what happens */
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 main(int argc, char **argv)
@@ -19,7 +19,7 @@ main(int argc, char **argv)
 
 	Connect(sockfd, (SA *) &servaddr, sizeof(servaddr));
 
-	shutdown(sockfd, SHUT_RD);
+	shutdown(sockfd, SHUT_RD); ///nb
 
 	pause();
 

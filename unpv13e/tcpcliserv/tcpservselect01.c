@@ -1,5 +1,5 @@
 /* include fig01 */
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 main(int argc, char **argv)

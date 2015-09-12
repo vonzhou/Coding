@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 
 void
 str_cli(FILE *fp, int sockfd)
@@ -12,7 +12,7 @@ str_cli(FILE *fp, int sockfd)
 		FD_SET(fileno(fp), &rset);
 		FD_SET(sockfd, &rset);
 		maxfdp1 = max(fileno(fp), sockfd) + 1;
-		Select(maxfdp1, &rset, NULL, NULL, NULL);
+		Select(maxfdp1, &rset, NULL, NULL, NULL); // we only care about the read fd
 
 		if (FD_ISSET(sockfd, &rset)) {	/* socket is readable */
 			if (Readline(sockfd, recvline, MAXLINE) == 0)

@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 #include	<netinet/tcp.h>		/* for TCP_MAXSEG */
 
 int

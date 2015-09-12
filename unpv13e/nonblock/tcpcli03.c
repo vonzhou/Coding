@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 main(int argc, char **argv)
@@ -21,7 +21,10 @@ main(int argc, char **argv)
 
 	ling.l_onoff = 1;		/* cause RST to be sent on close() */
 	ling.l_linger = 0;
-	Setsockopt(sockfd, SOL_SOCKET, SO_LINGER, &ling, sizeof(ling));
+	//Setsockopt(sockfd, SOL_SOCKET, SO_LINGER, &ling, sizeof(ling));
+
+	sleep(2);
+	
 	Close(sockfd);
 
 	exit(0);

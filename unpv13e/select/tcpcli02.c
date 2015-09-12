@@ -1,5 +1,5 @@
 /* Use standard echo server; baseline measurements for nonblocking version */
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 main(int argc, char **argv)
