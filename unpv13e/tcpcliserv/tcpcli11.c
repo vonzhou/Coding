@@ -1,5 +1,12 @@
 /* Use standard echo server; baseline measurements for nonblocking version */
-#include	"unp.h"
+#include	"../unp.h"
+
+//vonzhou: for SIGPIPE
+void sig_pipe(int signo){
+	printf("SIGPIPE caught in client, signo=%d, pid=%d\n", signo, getpid());
+	exit(-1);
+}
+
 
 int
 main(int argc, char **argv)
@@ -14,8 +21,11 @@ main(int argc, char **argv)
 
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
-	servaddr.sin_port = htons(7);
+	servaddr.sin_port = htons(SERV_PORT);
 	Inet_pton(AF_INET, argv[1], &servaddr.sin_addr);
+
+	// handle SIGPIPE
+	Signal(SIGPIPE, sig_pipe);
 
 	Connect(sockfd, (SA *) &servaddr, sizeof(servaddr));
 

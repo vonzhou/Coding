@@ -1,5 +1,4 @@
-/* include writen */
-#include	"unp.h"
+#include	"../unp.h"
 
 ssize_t						/* Write "n" bytes to a descriptor. */
 writen(int fd, const void *vptr, size_t n)
@@ -23,7 +22,6 @@ writen(int fd, const void *vptr, size_t n)
 	}
 	return(n);
 }
-/* end writen */
 
 void
 Writen(int fd, void *ptr, size_t nbytes)

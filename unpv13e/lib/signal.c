@@ -1,5 +1,4 @@
-/* include signal */
-#include	"unp.h"
+#include	"../unp.h"
 
 Sigfunc *
 signal(int signo, Sigfunc *func)

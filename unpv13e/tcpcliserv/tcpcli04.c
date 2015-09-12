@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 main(int argc, char **argv)
@@ -22,5 +22,5 @@ main(int argc, char **argv)
 
 	str_cli(stdin, sockfd[0]);		/* do it all */
 
-	exit(0);
+	exit(0); // all sockets will close...
 }

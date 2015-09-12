@@ -1,4 +1,4 @@
-#include	"unp.h"
+#include	"../unp.h"
 #include	"sum.h"
 
 void

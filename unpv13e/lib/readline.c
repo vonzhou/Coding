@@ -1,5 +1,4 @@
-/* include readline */
-#include	"unp.h"
+#include	"../unp.h"
 
 static int	read_cnt;
 static char	*read_ptr;
@@ -55,7 +54,6 @@ readlinebuf(void **vptrptr)
 		*vptrptr = read_ptr;
 	return(read_cnt);
 }
-/* end readline */
 
 ssize_t
 Readline(int fd, void *ptr, size_t maxlen)

@@ -1,5 +1,4 @@
-/* include readn */
-#include	"unp.h"
+#include	"../unp.h"
 
 ssize_t						/* Read "n" bytes from a descriptor. */
 readn(int fd, void *vptr, size_t n)
@@ -24,7 +23,6 @@ readn(int fd, void *vptr, size_t n)
 	}
 	return(n - nleft);		/* return >= 0 */
 }
-/* end readn */
 
 ssize_t
 Readn(int fd, void *ptr, size_t nbytes)

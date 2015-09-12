@@ -16,7 +16,7 @@
  *warning: passing arg 2 of `connect' discards `const' from pointer target type
  */
 
-#include	"unp.h"
+#include	"../unp.h"
 
 int
 Accept(int fd, struct sockaddr *sa, socklen_t *salenptr)

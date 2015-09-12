@@ -2,7 +2,7 @@
  * Standard I/O wrapper functions.
  */
 
-#include	"unp.h"
+#include	"../unp.h"
 
 void
 Fclose(FILE *fp)
