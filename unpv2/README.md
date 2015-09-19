@@ -7,7 +7,7 @@
 
 
 
-## [管道 pipe](pipe/)
+## [4. 管道 pipe](pipe/)
 
 
 5. Posix 消息队列  --posixmq;
@@ -20,7 +20,9 @@
 
 ## [System V Message Queue](svmsg/)
 
-## [System V Share Memory](svshm/)
+## [12. 共享内存区介绍 mmap](shm/)
+
+## [14. System V共享内存](svshm/)
 
 
 
