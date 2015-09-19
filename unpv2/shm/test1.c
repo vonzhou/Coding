@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -12,7 +12,7 @@ main(int argc, char **argv)
 	filesize = atoi(argv[2]);
 	mmapsize = atoi(argv[3]);
 
-		/* 4open file: create or truncate; set file size */
+	/* open file: create or truncate; set file size */
 	fd = Open(argv[1], O_RDWR | O_CREAT | O_TRUNC, FILE_MODE);
 	Lseek(fd, filesize-1, SEEK_SET);
 	Write(fd, "", 1);

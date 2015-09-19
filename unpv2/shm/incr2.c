@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	SEM_NAME	"mysem"
 
@@ -13,15 +13,18 @@ main(int argc, char **argv)
 		err_quit("usage: incr2 <pathname> <#loops>");
 	nloop = atoi(argv[2]);
 
-		/* 4open file, initialize to 0, map into memory */
+	/* open file, initialize to 0, map into memory */
 	fd = Open(argv[1], O_RDWR | O_CREAT, FILE_MODE);
-	Write(fd, &zero, sizeof(int));
+	Write(fd, &zero, sizeof(int));  // a int = 0
+
 	ptr = Mmap(NULL, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	Close(fd);
 
-		/* 4create, initialize, and unlink semaphore */
-	mutex = Sem_open(Px_ipc_name(SEM_NAME), O_CREAT | O_EXCL, FILE_MODE, 1);
-	Sem_unlink(Px_ipc_name(SEM_NAME));
+	/* create, initialize, and unlink semaphore */
+	mutex = Sem_open(SEM_NAME, O_CREAT | O_EXCL, FILE_MODE, 1);
+	Sem_unlink(SEM_NAME);
+	// mutex = Sem_open(Px_ipc_name(SEM_NAME), O_CREAT | O_EXCL, FILE_MODE, 1);
+	// Sem_unlink(Px_ipc_name(SEM_NAME));
 
 	setbuf(stdout, NULL);	/* stdout is unbuffered */
 	if (Fork() == 0) {		/* child */
@@ -33,7 +36,7 @@ main(int argc, char **argv)
 		exit(0);
 	}
 
-		/* 4parent */
+	/* parent */
 	for (i = 0; i < nloop; i++) {
 		Sem_wait(mutex);
 		printf("parent: %d\n", (*ptr)++);

@@ -654,20 +654,7 @@ Strdup(const char *str)
 	return(ptr);
 }
 
-long
-Sysconf(int name)
-{
-	long	val;
 
-	errno = 0;		/* in case sysconf() does not change this */
-	if ( (val = sysconf(name)) == -1) {
-		if (errno != 0)
-			err_sys("sysconf error");
-		else
-			err_sys("sysconf: %d not defined", name);
-	}
-	return(val);
-}
 
 #ifdef	HAVE_SYS_SYSCTL_H
 

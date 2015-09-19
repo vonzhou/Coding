@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 struct shared {
   sem_t	mutex;		/* the mutex: a Posix memory-based semaphore */
@@ -15,14 +15,15 @@ main(int argc, char **argv)
 		err_quit("usage: incr3 <pathname> <#loops>");
 	nloop = atoi(argv[2]);
 
-		/* 4open file, initialize to 0, map into memory */
+	/* open file, initialize to 0, map into memory */
 	fd = Open(argv[1], O_RDWR | O_CREAT, FILE_MODE);
-	Write(fd, &shared, sizeof(struct shared));
+	Write(fd, &shared, sizeof(struct shared)); // write mutex and counter to the file
+
 	ptr = Mmap(NULL, sizeof(struct shared), PROT_READ | PROT_WRITE,
 			   MAP_SHARED, fd, 0);
 	Close(fd);
 
-		/* 4initialize semaphore that is shared between processes */
+	/* initialize semaphore that is shared between processes */
 	Sem_init(&ptr->mutex, 1, 1);
 
 	setbuf(stdout, NULL);	/* stdout is unbuffered */

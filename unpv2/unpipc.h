@@ -281,7 +281,7 @@ void	 Touch(void *, int);
 int		 Writable_timeo(int, int);
 void	 Writen(int, void *, size_t);
 
-			/* prototypes for our Unix wrapper functions */
+/* prototypes for our Unix wrapper functions */
 void	*Calloc(size_t, size_t);
 void	 Close(int);
 void	 Dup2(int, int);

@@ -65,6 +65,48 @@ Write(int fd, void *ptr, size_t nbytes)
 		err_sys("write error");
 }
 
+off_t
+Lseek(int fd, off_t offset, int whence)
+{
+	off_t	pos;
+
+	if ( (pos = lseek(fd, offset, whence)) == (off_t) -1)
+		err_sys("lseek error");
+	return(pos);
+}
+
+long
+Fpathconf(int fd, int name)
+{
+	long	val;
+
+	errno = 0;		/* in case fpathconf() does not change this */
+	if ( (val = fpathconf(fd, name)) == -1) {
+		if (errno != 0)
+			err_sys("fpathconf error");
+		else
+			err_sys("fpathconf: %d not defined", name);
+	}
+	return(val);
+}
+
+void
+Fstat(int fd, struct stat *ptr)
+{
+	if (fstat(fd, ptr) == -1)
+		err_sys("fstat error");
+}
+
+
+
+void
+Ftruncate(int fd, off_t length)
+{
+	if (ftruncate(fd, length) == -1)
+		err_sys("ftruncate error");
+}
+
+
 void
 Unlink(const char *pathname)
 {
@@ -339,6 +381,23 @@ Msgrcv(int id, void *ptr, size_t len, int type, int flag)
 	return(rc);
 }
 
+// ----------------- memory map -----------------
+void *
+Mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset)
+{
+	void	*ptr;
+
+	if ( (ptr = mmap(addr, len, prot, flags, fd, offset)) == MAP_FAILED)
+		err_sys("mmap error");
+	return(ptr);
+}
+
+void
+Munmap(void *addr, size_t len)
+{
+	if (munmap(addr, len) == -1)
+		err_sys("munmap error");
+}
 
 // ---------------- system v share memory -----------------
 
