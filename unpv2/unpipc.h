@@ -20,7 +20,6 @@
 #include	<stdarg.h>		/* for variable arg lists */
 
 
-
 // ftok()
 #include	<sys/ipc.h>		/* System V IPC */
 
@@ -91,9 +90,7 @@ union semun {				/* define union for semctl() */
 # include	<sys/filio.h>
 #endif
 
-#ifdef	HAVE_PTHREAD_H
-# include	<pthread.h>
-#endif
+#include	<pthread.h>  
 
 #ifdef	HAVE_DOOR_H
 # include	<door.h>		/* Solaris doors API */

@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 struct shmstruct {	/* struct stored in shared memory */
   int	count;
@@ -14,16 +14,16 @@ main(int argc, char **argv)
 	if (argc != 3)
 		err_quit("usage: server1 <shmname> <semname>");
 
-	shm_unlink(Px_ipc_name(argv[1]));		/* OK if this fails */
+	shm_unlink(argv[1]);		/* OK if this fails */
 		/* 4create shm, set its size, map it, close descriptor */
-	fd = Shm_open(Px_ipc_name(argv[1]), O_RDWR | O_CREAT | O_EXCL, FILE_MODE);
+	fd = Shm_open(argv[1], O_RDWR | O_CREAT | O_EXCL, FILE_MODE);
 	Ftruncate(fd, sizeof(struct shmstruct));
 	ptr = Mmap(NULL, sizeof(struct shmstruct), PROT_READ | PROT_WRITE,
 			   MAP_SHARED, fd, 0);
 	Close(fd);
 
-	sem_unlink(Px_ipc_name(argv[2]));		/* OK if this fails */
-	mutex = Sem_open(Px_ipc_name(argv[2]), O_CREAT | O_EXCL, FILE_MODE, 1);
+	sem_unlink(argv[2]);		/* OK if this fails */
+	mutex = Sem_open(argv[2], O_CREAT | O_EXCL, FILE_MODE, 1);
 	Sem_close(mutex);
 
 	exit(0);

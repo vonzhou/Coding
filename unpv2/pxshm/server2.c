@@ -10,7 +10,7 @@ main(int argc, char **argv)
 	if (argc != 2)
 		err_quit("usage: server2 <name>");
 
-		/* 4create shm, set its size, map it, close descriptor */
+	/* create shm, set its size, map it, close descriptor */
 	shm_unlink(Px_ipc_name(argv[1]));		/* OK if this fails */
 	fd = Shm_open(Px_ipc_name(argv[1]), O_RDWR | O_CREAT | O_EXCL, FILE_MODE);
 	ptr = Mmap(NULL, sizeof(struct shmstruct), PROT_READ | PROT_WRITE,
@@ -18,11 +18,11 @@ main(int argc, char **argv)
 	Ftruncate(fd, sizeof(struct shmstruct));
 	Close(fd);
 
-		/* 4initialize the array of offsets */
+	/* initialize the array of offsets */
 	for (index = 0; index < NMESG; index++)
 		ptr->msgoff[index] = index * MESGSIZE;
 
-		/* 4initialize the semaphores in shared memory */
+	/* initialize the semaphores in shared memory */
 	Sem_init(&ptr->mutex, 1, 1);
 	Sem_init(&ptr->nempty, 1, NMESG);
 	Sem_init(&ptr->nstored, 1, 0);

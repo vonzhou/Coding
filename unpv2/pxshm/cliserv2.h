@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	MESGSIZE	256		/* max #bytes per message, incl. null at end */
 #define	NMESG		 16		/* max #messages */

@@ -1,4 +1,4 @@
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 int
 main(int argc, char **argv)
@@ -19,10 +19,10 @@ main(int argc, char **argv)
 		err_quit("usage: shmcreate [ -e ] <name> <length>");
 	length = atoi(argv[optind + 1]);
 
-	fd = Shm_open(argv[optind], flags, FILE_MODE);
-	Ftruncate(fd, length);
+	fd = Shm_open(argv[optind], flags, FILE_MODE); // create or open a share memory object
+	Ftruncate(fd, length);  // set length
 
-	ptr = Mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	ptr = Mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); // map to my address space
 
 	exit(0);
 }

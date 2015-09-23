@@ -1,5 +1,4 @@
-/* include main */
-#include	"unpipc.h"
+#include	"../unpipc.h"
 
 #define	MAXNITEMS 		1000000
 #define	MAXNTHREADS			100
@@ -25,28 +24,28 @@ main(int argc, char **argv)
 	nitems = min(atoi(argv[1]), MAXNITEMS);
 	nthreads = min(atoi(argv[2]), MAXNTHREADS);
 
-	Set_concurrency(nthreads);
-		/* 4start all the producer threads */
+	//Set_concurrency(nthreads); //
+
+
+	/* start all the producer threads */
 	for (i = 0; i < nthreads; i++) {
 		count[i] = 0;
 		Pthread_create(&tid_produce[i], NULL, produce, &count[i]);
 	}
 
-		/* 4wait for all the producer threads */
+	/* wait for all the producer threads */
 	for (i = 0; i < nthreads; i++) {
 		Pthread_join(tid_produce[i], NULL);
 		printf("count[%d] = %d\n", i, count[i]);	
 	}
 
-		/* 4start, then wait for the consumer thread */
+	/* start, then wait for the consumer thread */
 	Pthread_create(&tid_consume, NULL, consume, NULL);
 	Pthread_join(tid_consume, NULL);
 
 	exit(0);
 }
-/* end main */
 
-/* include producer */
 void *
 produce(void *arg)
 {
@@ -60,7 +59,7 @@ produce(void *arg)
 		shared.nput++;
 		shared.nval++;
 		Pthread_mutex_unlock(&shared.mutex);
-		*((int *) arg) += 1;
+		*((int *) arg) += 1; // out of the critical area, bcs every produce thread has its own counter variable/memo
 	}
 }
 
@@ -75,4 +74,3 @@ consume(void *arg)
 	}
 	return(NULL);
 }
-/* end producer */
